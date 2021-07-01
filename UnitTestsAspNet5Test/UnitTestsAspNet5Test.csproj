@@ -17,4 +17,19 @@
     <ProjectReference Include="..\UnitTestsAspNet5\UnitTestsAspNet5.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="UnitTestsAspNet5.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>UnitTestsAspNet5.runsettings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="UnitTestsAspNet5.runsettings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>UnitTestsAspNet5.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
 </Project>
