@@ -10,30 +10,56 @@ namespace UnitTestsAspNet5Test
     {
         private const string BAD_FILE_NAME = @"C:\NotExists.bad";         
 
+        [ClassInitialize()]
+        public static void ClassInitialize(TestContext tc)
+        {
+            // Initialize for all tests in class
+            tc.WriteLine("In ClassInitialize() method");
+        }
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            TestContext.WriteLine("In TestInitialize() method");
+
+            if (TestContext.TestName.StartsWith("FileNameDoesExist"))
+            {
+                SetGoodFileName();
+                if (!string.IsNullOrEmpty(_GoodFileName))
+                {
+                    // Create the 'Good' file.
+                    File.AppendAllText(_GoodFileName, "Some Text");
+                }
+            }
+        }     
+
         [TestMethod]
         public void FileNameDoesExists()
         {
             FileProcess fp = new FileProcess();
             bool fromCall;
-
-            SetGoodFileName();
-            if(!string.IsNullOrEmpty(_GoodFileName))
-            {
-                // Create the 'Good' file.
-                File.AppendAllText(_GoodFileName, "Some Text");
-            }
-
+                       
             TestContext.WriteLine(@"Checking File " + _GoodFileName);
 
-            fromCall = fp.FileExists(_GoodFileName);
-
-            // Delete file
-            if (File.Exists(_GoodFileName))
-            {
-                File.Delete(_GoodFileName);
-            }
+            fromCall = fp.FileExists(_GoodFileName);       
 
             Assert.IsTrue(fromCall);
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            TestContext.WriteLine("In TestCleanup() method");
+
+            if (TestContext.TestName.StartsWith("FileNameDoesExist"))
+            {
+                // Delete file
+                if (File.Exists(_GoodFileName))
+                {
+                    TestContext.WriteLine("Deleting file: " + _GoodFileName);
+                    File.Delete(_GoodFileName);
+                }
+            }
         }
 
         [TestMethod]
@@ -75,6 +101,12 @@ namespace UnitTestsAspNet5Test
             }
 
             Assert.Fail("Call to FileExists() did not throw an ArgumentNullException.");
+        }
+
+        [ClassCleanup()]
+        public static void ClassCleanup()
+        {
+            // Clean up after all tests in class
         }
     }
 }
