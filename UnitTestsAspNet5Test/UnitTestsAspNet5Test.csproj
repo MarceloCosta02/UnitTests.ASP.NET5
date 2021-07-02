@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="FileToDeploy.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="UnitTestsAspNet5.runsettings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>UnitTestsAspNet5.Designer.cs</LastGenOutput>
