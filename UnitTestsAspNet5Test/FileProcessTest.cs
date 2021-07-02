@@ -97,7 +97,8 @@ namespace UnitTestsAspNet5Test
 
             fromCall = fp.FileExists(BAD_FILE_NAME);
 
-            Assert.IsFalse(fromCall);
+            Assert.IsFalse(fromCall, 
+                "File " + BAD_FILE_NAME + " Does Not Exist.");
         }
 
         [TestMethod]
