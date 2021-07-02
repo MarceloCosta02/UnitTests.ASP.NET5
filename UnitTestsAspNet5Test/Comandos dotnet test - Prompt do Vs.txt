@@ -1,0 +1,33 @@
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings
+
+// Extrai o resultado dos testes no console de forma detalhada
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --logger "console;verbosity=detailed"
+
+// Extrai o resultado dos testes para TRX
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --logger "trx"
+
+// Extrai o resultado dos testes para HTML
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --logger "html"
+
+// Filtrar um teste especifico
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --filter "Name=FileNameDoesExist"
+
+// Filtrar por mais de um teste especifico
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --filter "(Name=FileNameDoesExist) | (Name=FileNameDoesNotExist)" 
+
+// Filtrar por um teste que começa com FileName (exemplo)
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --filter "Name~FileName"
+
+// Filtrar por um teste que tem o atributo de Priority = 1 (exemplo)
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --filter "Priority=1"
+
+// Filtrar por um teste que tem o atributo de TestCategory = "NoException" (exemplo)
+
+dotnet test UnitTestsAspNet5Test.csproj --settings UnitTestsAspNet5.runsettings --filter "TestCategory=NoException"
